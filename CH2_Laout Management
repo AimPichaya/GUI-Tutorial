@@ -1,0 +1,580 @@
+# GUI-Tutorial
+#Imports
+import tkinter as tk
+from tkinter import ttk
+from tkinter import scrolledtext
+from tkinter import Menu
+
+def basic_1():
+# Using radio button widgets
+    win = tk.Tk()
+
+    # Add a title
+    win.title("python GUI")
+    win.option_add("*Font", "consolar 15")
+
+    # Adding a Label that will get modified
+    a_label = ttk.Label(win, text="Pleas Click")
+    a_label.grid(column=1, row=0)
+
+    def click_me():
+        action.configure(text="Hello" + name.get())
+
+    # Changing our Label
+    ttk.Label(win, text="Enter a name:").grid(column=0, row=0)
+
+    # Adding a Textbox Entry widget
+    name = tk.StringVar()
+    name_entered = ttk.Entry(win, width=12, text=name)
+    name_entered.grid(column=0, row=1)
+
+    # Adding a Button
+    action = ttk.Button(win, text="Click me!", command=click_me)
+    action.grid(column=2, row=1)
+
+    # Creating three checkbuttons
+    ttk.Label(win, text="Choose a number:").grid(column=1, row=0)
+    number = tk.StringVar()
+    number_chosen = ttk.Combobox(win, width=12, text=number, state="readonly")
+    number_chosen['values'] = (1, 2, 3, 4, 5)
+    number_chosen.grid(column=1, row=1)
+    number_chosen.current(0)
+
+    chVarDis = tk.IntVar()
+    check_1 = tk.Checkbutton(win, text="Disabled", state="disabled")
+    check_1.select()
+    check_1.grid(column=0, row=4, sticky=tk.W)
+
+    chVarUn = tk.IntVar()
+    check_2 = tk.Checkbutton(win, text="UnChecked")
+    check_2.deselect()
+    check_2.grid(column=1, row=4, sticky=tk.W)
+
+    chVarEn = tk.IntVar()
+    check_3 = tk.Checkbutton(win, text="Enabled")
+    check_3.deselect()
+    check_3.grid(column=2, row=4, sticky=tk.W)
+
+    # Usinga scrolled Text control
+    scrol_w = 35
+    scrol_h = 3
+    scr = scrolledtext.ScrolledText(win, width=scrol_w, height=scrol_h, wrap=tk.WORD)
+    scr.grid(column=0, columnspan=3)
+
+    # Redioutton Callback
+    def radCall():
+        radSel = radVar.get()
+        if redSel == 1:
+            win.configure(background='Blue')
+        elif redSel == 2:
+            win.configure(background='Gold')
+        elif redSel == 3:
+            win.configure(background='Red')
+
+    # Create three Radiobuttons using one variable
+    radVar = tk.IntVar()
+
+    rad1 = tk.Radiobutton(win, text='Blue', variable=radVar, value=1, command=radCall)
+    rad1.grid(column=0, row=7, stick=tk.W, columnspan=3)
+
+    rad2 = tk.Radiobutton(win, text='Gold', variable=radVar, value=2, command=radCall)
+    rad2.grid(column=1, row=7, stick=tk.W, columnspan=3)
+
+    rad3 = tk.Radiobutton(win, text='Red', variable=radVar, value=3, command=radCall)
+    rad3.grid(column=2, row=7, stick=tk.W, columnspan=3)
+
+    #create a container to hold labels
+    buttons_frame = ttk.LabelFrame(win, text="Labels in a Frame")
+    buttons_frame .grid(column=0, row=9)
+
+    #Place labelsinto thecontainer element
+    ttk.Label(buttons_frame, text="Label1").grid(column=0,row=1 ,sticky=tk.W ,padx=10,pady=5)
+    ttk.Label(buttons_frame, text="Label2").grid(column=0, row=2, sticky=tk.W ,padx=10,pady=5)
+    ttk.Label(buttons_frame, text="Label3").grid(column=0, row=3, sticky=tk.W ,padx=10,pady=5)
+
+    #for child in buttons_frame.winfo_children():
+        #child.grid_configure(padx=8 ,pady=4)
+
+    name_entered.focus()
+
+    win.mainloop()
+
+#Aligning the GUI widgets by embedding frames within frame
+#win=> mighty => Label,Entry,Button,Etc.
+def basic_2():
+    # Using radio button widgets
+    win = tk.Tk()
+
+    # Add a title
+    win.title("python GUI")
+
+    #We are creating a container frame to holdall other widgets
+    mighty = ttk.LabelFrame(win, text="Mighty Python")
+    mighty.grid(column=0,row=0,padx=8,pady=4)
+
+    #Modify adding a Label using mighty as the parent instead of win
+    # Adding a Label that will get modified
+    a_label = ttk.Label(mighty, text="Pleas Click")
+    a_label.grid(column=1, row=0)
+
+    def click_me():
+        action.configure(text="Hello" + name.get())
+
+    # Changing our Label
+    ttk.Label(mighty, text="Enter a name:").grid(column=0, row=0)
+
+    # Adding a Textbox Entry widget
+    name = tk.StringVar()
+    name_entered = ttk.Entry(mighty, width=12, text=name)
+    name_entered.grid(column=0, row=1)
+
+    # Adding a Button
+    action = ttk.Button(mighty, text="Click me!", command=click_me)
+    action.grid(column=2, row=1)
+
+    # Creating three checkbuttons
+    ttk.Label(mighty, text="Choose a number:").grid(column=1, row=0)
+    number = tk.StringVar()
+    number_chosen = ttk.Combobox(mighty, width=12, text=number, state="readonly")
+    number_chosen['values'] = (1, 2, 3, 4, 5)
+    number_chosen.grid(column=1, row=1)
+    number_chosen.current(0)
+
+    chVarDis = tk.IntVar()
+    check_1 = tk.Checkbutton(mighty, text="Disabled", state="disabled")
+    check_1.select()
+    check_1.grid(column=0, row=4, sticky=tk.W)
+
+    chVarUn = tk.IntVar()
+    check_2 = tk.Checkbutton(mighty, text="UnChecked")
+    check_2.deselect()
+    check_2.grid(column=1, row=4, sticky=tk.W)
+
+    chVarEn = tk.IntVar()
+    check_3 = tk.Checkbutton(mighty, text="Enabled")
+    check_3.deselect()
+    check_3.grid(column=2, row=4, sticky=tk.W)
+
+    # Usinga scrolled Text control
+    scrol_w = 35
+    scrol_h = 3
+    scr = scrolledtext.ScrolledText(mighty, width=scrol_w, height=scrol_h, wrap=tk.WORD)
+    scr.grid(column=0, columnspan=3)
+
+    # Redioutton Callback
+    def radCall():
+        radSel = radVar.get()
+        if redSel == 1:
+            win.configure(background='Blue')
+        elif redSel == 2:
+            win.configure(background='Gold')
+        elif redSel == 3:
+            win.configure(background='Red')
+
+    # Create three Radiobuttons using one variable
+    radVar = tk.IntVar()
+
+    rad1 = tk.Radiobutton(mighty, text='Blue', variable=radVar, value=1, command=radCall)
+    rad1.grid(column=0, row=6, stick=tk.W, columnspan=3)
+
+    rad2 = tk.Radiobutton(mighty, text='Gold', variable=radVar, value=2, command=radCall)
+    rad2.grid(column=1, row=6, stick=tk.W, columnspan=3)
+
+    rad3 = tk.Radiobutton(mighty, text='Red', variable=radVar, value=3, command=radCall)
+    rad3.grid(column=2, row=6, stick=tk.W, columnspan=3)
+
+    # create a container to hold labels
+    buttons_frame = ttk.LabelFrame(mighty, text="Labels in a Frame")
+    buttons_frame.grid(column=0, row=7)
+
+    # Place labelsinto thecontainer element
+    ttk.Label(buttons_frame, text="Label1").grid(column=0, row=0, sticky=tk.W, padx=10, pady=5)
+    ttk.Label(buttons_frame, text="Label2").grid(column=0, row=1, sticky=tk.W, padx=10, pady=5)
+    ttk.Label(buttons_frame, text="Label3").grid(column=0, row=2, sticky=tk.W, padx=10, pady=5)
+
+    win.mainloop()
+
+def basic_3():
+    #Creating menu bar
+    # Using radio button widgets
+    win = tk.Tk()
+
+    # Add a title
+    win.title("python GUI")
+    win.option_add("*Font", "consolar 10")
+
+    #We are creating a container frame to holdall other widgets
+    mighty = ttk.LabelFrame(win, text="Mighty Python")
+    mighty.grid(column=0,row=0,padx=8,pady=4)
+
+    #Modify adding a Label using mighty as the parent instead of win
+    # Adding a Label that will get modified
+    a_label = ttk.Label(mighty, text="Pleas Click")
+    a_label.grid(column=1, row=0)
+
+    def click_me():
+        action.configure(text="Hello" + name.get())
+
+    # Changing our Label
+    ttk.Label(mighty, text="Enter a name:").grid(column=0, row=0)
+
+    # Adding a Textbox Entry widget
+    name = tk.StringVar()
+    name_entered = ttk.Entry(mighty, width=12, text=name)
+    name_entered.grid(column=0, row=1)
+
+    # Adding a Button
+    action = ttk.Button(mighty, text="Click me!", command=click_me)
+    action.grid(column=2, row=1)
+
+    # Creating three checkbuttons
+    ttk.Label(mighty, text="Choose a number:").grid(column=1, row=0)
+    number = tk.StringVar()
+    number_chosen = ttk.Combobox(mighty, width=12, text=number, state="readonly")
+    number_chosen['values'] = (1, 2, 3, 4, 5)
+    number_chosen.grid(column=1, row=1)
+    number_chosen.current(0)
+
+    chVarDis = tk.IntVar()
+    check_1 = tk.Checkbutton(mighty, text="Disabled", state="disabled")
+    check_1.select()
+    check_1.grid(column=0, row=4, sticky=tk.W)
+
+    chVarUn = tk.IntVar()
+    check_2 = tk.Checkbutton(mighty, text="UnChecked")
+    check_2.deselect()
+    check_2.grid(column=1, row=4, sticky=tk.W)
+
+    chVarEn = tk.IntVar()
+    check_3 = tk.Checkbutton(mighty, text="Enabled")
+    check_3.deselect()
+    check_3.grid(column=2, row=4, sticky=tk.W)
+
+    # Usinga scrolled Text control
+    scrol_w = 30
+    scrol_h = 3
+    scr = scrolledtext.ScrolledText(mighty, width=scrol_w, height=scrol_h, wrap=tk.WORD)
+    scr.grid(column=0, row = 5 , columnspan=3)
+
+    # Redioutton Callback
+    def radCall():
+        radSel = radVar.get()
+        if redSel == 1:
+            win.configure(background='Blue')
+        elif redSel == 2:
+            win.configure(background='Gold')
+        elif redSel == 3:
+            win.configure(background='Red')
+
+    # Create three Radiobuttons using one variable
+    radVar = tk.IntVar()
+
+    rad1 = tk.Radiobutton(mighty, text='Blue', variable=radVar, value=1, command=radCall)
+    rad1.grid(column=0, row=7, stick=tk.W, columnspan=3)
+
+    rad2 = tk.Radiobutton(mighty, text='Gold', variable=radVar, value=2, command=radCall)
+    rad2.grid(column=1, row=7, stick=tk.W, columnspan=3)
+
+    rad3 = tk.Radiobutton(mighty, text='Red', variable=radVar, value=3, command=radCall)
+    rad3.grid(column=2, row=7, stick=tk.W, columnspan=3)
+
+    # create a container to hold labels
+    buttons_frame = ttk.LabelFrame(mighty,text="Label in a Frame")
+    buttons_frame.grid(column=0, row=10)
+
+    # Place labelsinto thecontainer element
+    ttk.Label(buttons_frame, text="Label1").grid(column=1, row=0)
+    ttk.Label(buttons_frame, text="Label2").grid(column=1, row=1)
+    ttk.Label(buttons_frame, text="Label3").grid(column=1, row=2)
+
+    for child in buttons_frame.winfo_children():
+       child.grid_configure(padx=8, pady=4)
+    #creating a menu bar
+    menu_bar = Menu(win)
+    win.configure(menu=menu_bar)
+
+    #create menu and add menu item
+    file_menu = Menu(menu_bar,tearoff=0)
+    file_menu.add_command(label="New Page")
+    file_menu.add_separator()
+    file_menu.add_command(label="    Exit")
+    file_menu.add_separator()
+    menu_bar.add_cascade(label="File",menu=file_menu)
+
+    name_entered.focus()
+
+    win.mainloop()
+
+def basic_4():
+    #Creating menu bar
+    # Using radio button widgets
+    win = tk.Tk()
+
+    # Add a title
+    win.title("python GUI")
+    win.option_add("*Font", "consolar 10")
+
+    #We are creating a container frame to holdall other widgets
+    mighty = ttk.LabelFrame(win, text="Mighty Python")
+    mighty.grid(column=0,row=0,padx=8,pady=4)
+
+    #Modify adding a Label using mighty as the parent instead of win
+    # Adding a Label that will get modified
+    a_label = ttk.Label(mighty, text="Pleas Click")
+    a_label.grid(column=1, row=0)
+
+    def click_me():
+        action.configure(text="Hello" + name.get())
+
+    # Changing our Label
+    ttk.Label(mighty, text="Enter a name:").grid(column=0, row=0)
+
+    # Adding a Textbox Entry widget
+    name = tk.StringVar()
+    name_entered = ttk.Entry(mighty, width=12, text=name)
+    name_entered.grid(column=0, row=1)
+
+    # Adding a Button
+    action = ttk.Button(mighty, text="Click me!", command=click_me)
+    action.grid(column=2, row=1)
+
+    # Creating three checkbuttons
+    ttk.Label(mighty, text="Choose a number:").grid(column=1, row=0)
+    number = tk.StringVar()
+    number_chosen = ttk.Combobox(mighty, width=12, text=number, state="readonly")
+    number_chosen['values'] = (1, 2, 3, 4, 5)
+    number_chosen.grid(column=1, row=1)
+    number_chosen.current(0)
+
+    chVarDis = tk.IntVar()
+    check_1 = tk.Checkbutton(mighty, text="Disabled", state="disabled")
+    check_1.select()
+    check_1.grid(column=0, row=4, sticky=tk.W)
+
+    chVarUn = tk.IntVar()
+    check_2 = tk.Checkbutton(mighty, text="UnChecked")
+    check_2.deselect()
+    check_2.grid(column=1, row=4, sticky=tk.W)
+
+    chVarEn = tk.IntVar()
+    check_3 = tk.Checkbutton(mighty, text="Enabled")
+    check_3.deselect()
+    check_3.grid(column=2, row=4, sticky=tk.W)
+
+    # Usinga scrolled Text control
+    scrol_w = 30
+    scrol_h = 3
+    scr = scrolledtext.ScrolledText(mighty, width=scrol_w, height=scrol_h, wrap=tk.WORD)
+    scr.grid(column=0, row = 5 , columnspan=3)
+
+    # Redioutton Callback
+    def radCall():
+        radSel = radVar.get()
+        if redSel == 1:
+            win.configure(background='Blue')
+        elif redSel == 2:
+            win.configure(background='Gold')
+        elif redSel == 3:
+            win.configure(background='Red')
+
+    # Create three Radiobuttons using one variable
+    radVar = tk.IntVar()
+
+    rad1 = tk.Radiobutton(mighty, text='Blue', variable=radVar, value=1, command=radCall)
+    rad1.grid(column=0, row=7, stick=tk.W, columnspan=3)
+
+    rad2 = tk.Radiobutton(mighty, text='Gold', variable=radVar, value=2, command=radCall)
+    rad2.grid(column=1, row=7, stick=tk.W, columnspan=3)
+
+    rad3 = tk.Radiobutton(mighty, text='Red', variable=radVar, value=3, command=radCall)
+    rad3.grid(column=2, row=7, stick=tk.W, columnspan=3)
+
+    # create a container to hold labels
+    buttons_frame = ttk.LabelFrame(mighty,text="Label in a Frame")
+    buttons_frame.grid(column=0, row=10)
+
+    # Place labelsinto thecontainer element
+    ttk.Label(buttons_frame, text="Label1").grid(column=1, row=0)
+    ttk.Label(buttons_frame, text="Label2").grid(column=1, row=1)
+    ttk.Label(buttons_frame, text="Label3").grid(column=1, row=2)
+
+    for child in buttons_frame.winfo_children():
+       child.grid_configure(padx=8, pady=4)
+
+    #Exit GUI clearnly
+    def _quit():
+        win.quit()
+        win.destroy()
+        exit()
+
+    #creating a menu bar
+    menu_bar = Menu(win)
+    win.configure(menu=menu_bar)
+
+    #create menu and add menu item
+    file_menu = Menu(menu_bar,tearoff=0)
+    file_menu.add_command(label="New Page")
+    file_menu.add_separator()
+    file_menu.add_command(label="    Exit")
+    file_menu.add_separator()
+    menu_bar.add_cascade(label="File",menu=file_menu)
+
+    # create menu and add menu item
+    file_menu = Menu(menu_bar, tearoff=0)
+    file_menu.add_command(label="About")
+    menu_bar.add_cascade(label="Help", menu=file_menu)
+
+    name_entered.focus()
+
+    win.mainloop()
+
+def basic_5():
+    # Using radio button widgets
+    win = tk.Tk()
+
+    # Add a title
+    win.title("python GUI")
+    win.option_add("*Font", "consolar 10")
+
+    tabControl = ttk.Notebook(win)
+
+    tab1 = ttk.Frame(tabControl)
+    tabControl.add(tab1, text="Tab1")
+    tab2 = ttk.Frame(tabControl)
+    tabControl.add(tab2, text="Tab2")
+    tabControl.pack(expand=1, fill="both")
+
+    # We are creating a container frame to holdall other widgets
+    mighty = ttk.LabelFrame(tab1, text="Mighty Python")
+    mighty.grid(column=0, row=0, padx=8, pady=4)
+
+# mighty2
+    mighty2 = ttk.LabelFrame(tab2, text="Mighty II Python")
+    mighty2.grid(column=0, row=0, padx=8, pady=4)
+
+    # Modify adding a Label using mighty as the parent instead of win
+    # Adding a Label that will get modified
+    a_label = ttk.Label(mighty, text="Pleas Click")
+    a_label.grid(column=1, row=0)
+
+
+    def click_me():
+        action.configure(text="Hello" + name.get())
+
+    # Changing our Label
+    ttk.Label(mighty, text="Enter a name:").grid(column=0, row=0)
+
+# mighty2
+    ttk.Label(mighty2, text="Enter a name:").grid(column=0, row=0)
+
+    # Adding a Textbox Entry widget
+    name = tk.StringVar()
+    name_entered = ttk.Entry(mighty, width=12, text=name)
+    name_entered.grid(column=0, row=1)
+
+# mighty2
+    name = tk.StringVar()
+    name_entered = ttk.Entry(mighty2, width=12, text=name)
+    name_entered.grid(column=0, row=1)
+
+    # Adding a Button
+    action = ttk.Button(mighty, text="Click me!", command=click_me)
+    action.grid(column=2, row=1)
+
+#mighty2
+    action = ttk.Button(mighty2, text="Click", command=click_me)
+    action.grid(column=2, row=1)
+
+    # Creating three checkbuttons
+    ttk.Label(mighty, text="Choose a number:").grid(column=1, row=0)
+    number = tk.StringVar()
+    number_chosen = ttk.Combobox(mighty, width=12, text=number, state="readonly")
+    number_chosen['values'] = (1, 2, 3, 4, 5)
+    number_chosen.grid(column=1, row=1)
+    number_chosen.current(0)
+
+    chVarDis = tk.IntVar()
+    check_1 = tk.Checkbutton(mighty, text="Disabled", state="disabled")
+    check_1.select()
+    check_1.grid(column=0, row=4, sticky=tk.W)
+
+    chVarDis = tk.IntVar()
+    check_1 = tk.Checkbutton(mighty2,text="Disabled", state="disabled")
+
+    chVarUn = tk.IntVar()
+    check_2 = tk.Checkbutton(mighty, text="UnChecked")
+    check_2.deselect()
+    check_2.grid(column=1, row=4, sticky=tk.W)
+
+    chVarEn = tk.IntVar()
+    check_3 = tk.Checkbutton(mighty, text="Enabled")
+    check_3.deselect()
+    check_3.grid(column=2, row=4, sticky=tk.W)
+
+    # Usinga scrolled Text control
+    scrol_w = 30
+    scrol_h = 3
+    scr = scrolledtext.ScrolledText(mighty, width=scrol_w, height=scrol_h, wrap=tk.WORD)
+    scr.grid(column=0, row=5, columnspan=3)
+
+    # Redioutton Callback
+    def radCall():
+        radSel = radVar.get()
+        if redSel == 1:
+            win.configure(background='Blue')
+        elif redSel == 2:
+            win.configure(background='Gold')
+        elif redSel == 3:
+            win.configure(background='Red')
+
+    # Create three Radiobuttons using one variable
+    radVar = tk.IntVar()
+
+    rad1 = tk.Radiobutton(mighty, text='Blue', variable=radVar, value=1, command=radCall)
+    rad1.grid(column=0, row=7, stick=tk.W, columnspan=3)
+
+    rad2 = tk.Radiobutton(mighty, text='Gold', variable=radVar, value=2, command=radCall)
+    rad2.grid(column=1, row=7, stick=tk.W, columnspan=3)
+
+    rad3 = tk.Radiobutton(mighty, text='Red', variable=radVar, value=3, command=radCall)
+    rad3.grid(column=2, row=7, stick=tk.W, columnspan=3)
+
+    # create a container to hold labels
+    buttons_frame = ttk.LabelFrame(mighty, text="Label in a Frame")
+    buttons_frame.grid(column=0, row=10)
+
+    # Place labelsinto thecontainer element
+    ttk.Label(buttons_frame, text="Label1").grid(column=1, row=0)
+    ttk.Label(buttons_frame, text="Label2").grid(column=1, row=1)
+    ttk.Label(buttons_frame, text="Label3").grid(column=1, row=2)
+
+    for child in buttons_frame.winfo_children():
+        child.grid_configure(padx=8, pady=4)
+
+    # creating a menu bar
+    menu_bar = Menu(win)
+    win.configure(menu=menu_bar)
+
+    # create menu and add menu item
+    file_menu = Menu(menu_bar, tearoff=0)
+    file_menu.add_command(label="New Page")
+    file_menu.add_separator()
+    file_menu.add_command(label="    Exit")
+    file_menu.add_separator()
+    menu_bar.add_cascade(label="File", menu=file_menu)
+
+    # create menu and add menu item
+    file_menu = Menu(menu_bar, tearoff=0)
+    file_menu.add_command(label="About")
+    menu_bar.add_cascade(label="Help", menu=file_menu)
+
+    name_entered.focus()
+
+    win.mainloop()
+
+if __name__ == '__main__':
+    basic_1()
+    basic_2()
+    basic_3()
+    basic_4()
+    basic_5()
