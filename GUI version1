@@ -1,0 +1,52 @@
+import tkinter.filedialog as filedialog
+import tkinter as ttk
+from tkinter import filedialog
+from tkinter import scrolledtext
+from tkinter import scrolledtext
+
+import cv2
+
+global win
+
+def browseFile():
+    win.filename = filedialog.askopenfilename(initialdir="/", title="Select A File",filetype=(("jpeg files", "*.jpg"), ("png files", "*.png")))
+    win.input_entry.delete(1, ttk.END)
+    win.input_entry.insert(0, win.filename)
+
+    if win.filename:
+        img = cv2.imread(win.filename)
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+        img = cv2.resize(img, (250, 340))
+        cv2.imshow('image', img)
+        cv2.waitKey(0)
+
+
+# Create instance
+
+win = ttk.Tk()
+
+win.title("                                                          Crack Detection GUI Version 1")
+win.option_add("*Font","MyriadPro 11")
+
+win.minsize(600,900 )
+
+win.iconbitmap('crack.ico')
+
+win.text_label = ttk.Label(win, text="Import Image")
+win.text_label.grid(column=0, row=1, sticky='W', padx=50, pady=10)
+
+win.labelFrame = ttk.Label(win)
+win.labelFrame.grid(column = 0, row = 1, sticky=ttk.W)
+
+win.top_frame = ttk.Frame(win)
+win.top_frame.grid()
+
+win.input_entry = ttk.Entry(win.top_frame, text="", width=40)
+win.input_entry.grid(column=1, row=0, padx=0)
+
+win.button = ttk.Button(win.top_frame, text="Browse to File: ", command=browseFile)
+win.button.grid(column=0, row=0, sticky=ttk.W, padx=40)
+
+
+win.mainloop()
